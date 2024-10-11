@@ -50,13 +50,15 @@ def main():
             #detecting left eye blink to click
             print(eye_landmarks[0].y - eye_landmarks[1].y,eye_landmarks[2].y - eye_landmarks[3].y)
 
-            #if coord 71.y > 21.y -> scroll up
-            #if coord 71.y < 162.y -> scroll down
-
-
             #avoinding while natural blinking
             if((eye_landmarks[0].y - eye_landmarks[1].y) < 0.019) and ((eye_landmarks[3].y - eye_landmarks[2].y) < 0.019):
                 continue
+            #if coord 71.y > 21.y -> scroll up
+            if (landmark[71].y > landmark[21].y):
+                pg.scroll(100)
+            #if coord 71.y < 162.y -> scroll down
+            if (landmark[71].y < landmark[162].y):
+                pg.scroll(-100)
             #left click
             if (eye_landmarks[0].y - eye_landmarks[1].y) < 0.017:
                 pg.click()
@@ -72,3 +74,4 @@ def main():
     cv2.destroyAllWindows()
 
 main()
+    
